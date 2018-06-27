@@ -3,7 +3,7 @@ WORKDIR /home/rust/src
 COPY Cargo.* /home/rust/src/
 COPY src /home/rust/src/src
 RUN find
-RUN cargo build --release
+RUN LIB_LDFLAGS=-L/usr/lib/x86_64-linux-gnu CFLAGS=-I/usr/local/musl/include CC=musl-gcc cargo build --release
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
